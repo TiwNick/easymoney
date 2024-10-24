@@ -29,4 +29,9 @@ public class PersonService {
     public List<Person> getAllPersons() {
         return personDAO.getAllPerson();
     }
+
+    public boolean validUser(String email, String password)
+    {
+        return personDAO.validUser(email, password);
+    }
 }

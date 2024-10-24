@@ -102,4 +102,24 @@ public class PersonDAO extends AcessoDAO {
             e.printStackTrace();
         }
     }
+
+    public boolean validUser(String email, String password) {
+        String sql = "SELECT * FROM person WHERE email = ? AND password = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
